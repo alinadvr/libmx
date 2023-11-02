@@ -1,6 +1,8 @@
 #include "libmx.h"
 
 unsigned long mx_hex_to_nbr(const char *hex) {
+    if (hex == NULL) return -1;
+
     unsigned long decimal = 0;
     int power = 0, value;
 

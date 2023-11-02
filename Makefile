@@ -20,7 +20,7 @@ SRC	= 	    mx_printchar.c mx_print_unicode.c mx_strlen.c mx_printstr.c mx_print_
 			mx_read_line.c mx_memset.c mx_memcpy.c mx_memccpy.c mx_memcmp.c mx_memchr.c \
 			mx_memrchr.c mx_memmem.c mx_memmove.c mx_realloc.c mx_create_node.c mx_push_front.c \
 			mx_push_back.c mx_pop_front.c mx_pop_back.c mx_list_size.c mx_sort_list.c is_space.c \
-			strcpy_part.c
+			strcpy_part.c file_size.c
 
 SRCS	=	$(addprefix $(SRCD)/, $(SRC))
 OBJS	=	$(addprefix $(OBJD)/, $(SRC:%.c=%.o))

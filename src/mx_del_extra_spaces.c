@@ -1,43 +1,38 @@
 #include "libmx.h"
 
-char *mx_del_extra_spaces(const char *str) {
-    if (str == NULL) return NULL;
+char *mx_del_extra_spaces(const char *str)
+{
+    int start = -1, end = -1, i = 0, j = 0, str_len = mx_strlen(str);
+    char *res = mx_strnew(str_len);
 
-    char words[20][30], *trimStr = mx_strtrim(str);
-    static char res[600];
-    int letter = 0, word = 0;
-
-    int i;
-    for (i = 0; trimStr[i] != '\0'; i++) {
-
-        if (!is_space(trimStr[i])) {
-            // return NULL if creation falls
-            if (word > 19 || letter > 29) return NULL;
-
-            words[word][letter] = trimStr[i];
-            letter++;
-
-            if (is_space(trimStr[i + 1]) || trimStr[i + 1] == '\0') {
-                words[word][letter] = '\0';
-                letter++;
-            }
-
-        }
-        else if (!is_space(trimStr[i - 1])) {
-            word++;
-            letter = 0;
-        }
+    while (start == -1)
+    {
+        if (!is_space(str[i]))
+            start = i;
+        else 
+            i++;
     }
 
-    int k = 0;
-    for (int i = 0; i <= word; i++, k++) {
+    i = str_len - 1;
+    while (end == -1)
+    {
+        if (!is_space(str[i]))
+            end = i;
+        else
+            i--;
+    }
 
-        for (int j = 0; words[i][j] != '\0' ; j++, k++)
-            res[k] = words[i][j];
-        
-        if (i != word)
-            res[k] = ' ';
-        
+    for (int k = start; k <= end; k++)
+    {
+        if (is_space(str[k]))
+        {
+            if (res[j - 1] != ' ')
+                res[j++] = ' ';
+                
+        }
+        else
+            res[j++] = str[k];
+
     }
 
     return res;

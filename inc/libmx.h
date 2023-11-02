@@ -1,8 +1,5 @@
-#include <wchar.h>
-#include <stdlib.h>
 #include <unistd.h>
-#include <malloc.h>
-// #include <malloc/malloc.h>
+#include <malloc/malloc.h>
 #include <fcntl.h>
 #include <stdbool.h>
 
@@ -79,5 +76,6 @@ t_list *mx_sort_list(t_list *lst, bool (*cmp)(char *, char *));
 // my pack
 int is_space(char c);
 char *strcpy_part(const char *s, int start, int end);
+int file_size(const char *file_name);
 
 #endif

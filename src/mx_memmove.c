@@ -2,28 +2,15 @@
 
 void *mx_memmove(void *dst, const void *src, size_t len)
 {
-    if (dst == NULL || src == NULL) return NULL;
+    if (dst == NULL || src == NULL || len < 0) return NULL;
 
-    unsigned char *d = (unsigned char *)dst;
-    const unsigned char *s = (const unsigned char *)src;
+    char *p_src = (char *) src;
+    char *p_dst = (char *) dst;
+    char *buf = (char *) malloc(sizeof(char) * len);
 
-    if (d == s || len == 0) return dst;
+    mx_memcpy(buf, p_src, len);
+    mx_memcpy(p_dst, buf, len);
+    free(buf);
 
-    if (d > s && d - s < (int)len)
-    {
-        for (int i = len - 1; i >= 0; i--)
-            d[i] = s[i];
-
-        return dst;
-    }
-	else
-    {
-		for (size_t i = 0; i < len; i--)
-			d[i] = s[i];
-
-        return dst;
-	}
-
-    mx_memcpy(dst, src, len);
     return dst;
 }

@@ -1,41 +1,37 @@
 #include "libmx.h"
 
-char **mx_strsplit(const char *s, char c) {
+char **mx_strsplit(const char *s, char c)
+{
     if (s == NULL) return NULL;
 
-    static char words[20][30];
-    int letter = 0, word = 0, delim = 0;
+    int count_words = mx_count_words(s, c);
+    if (count_words < 1) return NULL;
 
-    int i;
-    for (i = 0; s[i] != '\0'; i++) {
+    char **words = (char **) malloc(sizeof(char **) * (count_words + 1));
+    if (words == NULL) return NULL;
 
-        if (s[i] != c) {
-            // return NULL if creation falls
-            if (word > 19 || letter > 29) return NULL;
+    int word = 0, word_start = 0, word_end = 0;
 
-            words[word][letter] = s[i];
-            letter++;
-            delim = 0;
+    words[count_words] = NULL;
 
-            if (s[i + 1] == c || s[i + 1] == '\0') {
-                words[word][letter] = '\0';
-                letter++;
-            }
+    int i = 0;
+    while (s[i] != '\0')
+    {
 
-        }
-        else if (!delim) {
+        while (s[i] == c)
+            i++;
 
-            if (word != 0 || letter != 0) 
-                word++;
+        word_start = i;
 
-            letter = 0;
-            delim = 1;
+        while (s[i] != c && s[i] != '\0')
+            i++;
 
-        }
+        word_end = i - 1;
+
+        if (word_start < word_end)
+            words[word++] = strcpy_part(s, word_start, word_end);
 
     }
 
-    if (word == 0 && letter == 0) return NULL;
-
-    return (char **)words;
+    return words;
 }
