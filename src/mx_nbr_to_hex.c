@@ -2,9 +2,11 @@
 #include "libmx.h"
 
 char *mx_nbr_to_hex(unsigned long nbr) {
+    if (nbr == 0) return "0";
+
     double quotient = nbr;
     int remainder, i = 0;
-    static char res[100];
+    char *res = mx_strnew(20);
     
     while ((int) quotient != 0) {
         quotient /= 16;

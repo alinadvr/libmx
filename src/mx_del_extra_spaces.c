@@ -5,21 +5,24 @@ char *mx_del_extra_spaces(const char *str)
     int start = -1, end = -1, i = 0, j = 0, str_len = mx_strlen(str);
     char *res = mx_strnew(str_len);
 
-    while (start == -1)
-    {
+    while (start == -1) {
+
         if (!is_space(str[i]))
             start = i;
+        else if (i + 1 == str_len)
+            start = 0;
         else 
             i++;
+
     }
 
     i = str_len - 1;
-    while (end == -1)
-    {
+    while (end == -1 && i != start) {
         if (!is_space(str[i]))
             end = i;
         else
             i--;
+
     }
 
     for (int k = start; k <= end; k++)
@@ -31,8 +34,10 @@ char *mx_del_extra_spaces(const char *str)
                 
         }
         else
-            res[j++] = str[k];
-
+        {
+            res[j] = str[k];
+            j++;
+        }
     }
 
     return res;

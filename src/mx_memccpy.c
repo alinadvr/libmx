@@ -11,7 +11,18 @@ void *mx_memccpy(void *restrict dst, const void *restrict src, int c, size_t n)
         d[i] = s[i]; 
 
         if (s[i] == ch)
-            return &d[i + 1];
+        {
+            size_t j;
+
+            for (j = 0; j <= i; j++)
+            {
+                d[j] = s[j];
+            }
+
+            d[j] = '\0';
+
+            return d;
+        }
 
     }
 

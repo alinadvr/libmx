@@ -5,8 +5,6 @@ char *mx_itoa(int number)
     if (number == 0) return "0";
     if (number == -2147483648) return "-2147483648"; 
 
-    static char string[11]; // max int value + '-' sign
-    int nLength = 0;
     int negative = 0;
     
     if (number < 0)
@@ -14,6 +12,24 @@ char *mx_itoa(int number)
         negative = 1;
         number = -number;
     }
+
+    if (number > -10 && number < 10)
+    {
+        char *string = mx_strnew(2);
+
+        if (negative)
+        {
+            string[0] = '-';
+            string[1] = number + '0';
+        }
+        else 
+            string[0] = number + '0';
+        
+        return string;
+    }
+
+    char *string = mx_strnew(11); // max int value + '-' sign
+    int nLength = 0;
 
     while (number > 0)
     {

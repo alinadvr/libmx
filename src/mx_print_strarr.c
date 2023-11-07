@@ -1,12 +1,12 @@
 #include "libmx.h"
 
 void mx_print_strarr(char **arr, const char *delim) {
-    if (arr == NULL || delim == NULL) return;
+    if (arr == NULL || arr[0] == NULL || delim == NULL) return;
 
-    for (int i = 0; arr[i + 1] != NULL; i++) {
+    for (int i = 0; arr[i] != NULL; i++) {
         mx_printstr(arr[i]);
 
-        if (arr[i + 2] != NULL)
+        if (arr[i + 1] != NULL)
             mx_printstr(delim);
     }
 
