@@ -28,7 +28,7 @@ char **mx_strsplit(const char *s, char c)
 
         word_end = i - 1;
 
-        if (word_start < word_end)
+        if (word_start <= word_end)
             words[word++] = strcpy_part(s, word_start, word_end);
 
     }

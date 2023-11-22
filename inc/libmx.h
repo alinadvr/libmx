@@ -78,5 +78,7 @@ t_list *mx_sort_list(t_list *lst, bool (*cmp)(void *, void *));
 int is_space(char c);
 char *strcpy_part(const char *s, int start, int end);
 int file_size(const char *file_name);
+int mx_atoi(char *str);
+int index_of(char **arr, char *str);
 
 #endif
